@@ -1,10 +1,20 @@
-# Front Camp Webpack Homework.
+# Front Camp Design Patterns Homework.
 
 
-1.Configured babel Compilation
+1. The entire application logic is in a single file. He should make it modular and use the lazy loading (Make the app modular using import/exports)  --Done
 
-2.Integarted Babel with webpack.
+2. The application look and feel(UI) is still bad. Add some styling to make it better. -- TO BE Done
 
-3.Used WebPack Loader with Style Loader
+3. Error handling not added yet. --Done
 
-4.Used HTML Webpack plugin for generating production build folder.
+4. Have a class for all the constants and re-use them rather hard-coding --Done
+
+5. Add Bundler configuration dev and production modes --Done
+
+6. Add configuration for the web pack dev server -- Done
+
+7. remove the debugger statements --Done
+
+8. Add the error handling --Done
+
+

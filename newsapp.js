@@ -2,18 +2,8 @@ import "es6-promise/auto";
 import 'isomorphic-fetch';
 import '@babel/polyfill';
 import './styles.css';
-
-//Common class to do API calls.
-class FetchNewsData {
-    constructor(apiKey) {
-        this.apiKey = apiKey;
-    }
-
-    async fetchData(url) {
-        return fetch(`https://newsapi.org/v2/${url}&apiKey=${this.apiKey}`)  //Used ES6 Fetch
-
-    }
-}
+import * as CommonUtilities from './common.js';
+import { FetchNewsData } from './httpservice.js';
 
 //To Load the page with News Data using News API with pure javascript
 class DisplayNews {
@@ -23,99 +13,71 @@ class DisplayNews {
         this.newsData = [];
     }
 
-
-    createNode(element) {
-        return document.createElement(element);
-    }
-
-    appendElement(parent, el) {
-        return parent.appendChild(el);
-    }
-
     async displaySources(apikey) {
-        const channelsDropdown = document.getElementById("ddlchannelslist");
-        const fetchDataObj = new FetchNewsData(apikey)
-        debugger;
-        let apiData = await fetchDataObj.fetchData("sources?language=en");
-        let data = await apiData.json();  /*ES 2016*/
-        this.newsData = data.sources;
-        data.sources.map((item) => { //Used map on arrays
-            let option = this.createNode('option');
-            option.text = item.name;
-            option.id = option.value = item.id;
-            channelsDropdown.add(option);
-        });
-        this.sourcesOnChange();
+        try {
+            const channelsDropdown = document.getElementById(CommonUtilities.constants.ddlchannelslist);
+            const fetchDataObj = new FetchNewsData(apikey)
+            let apiData = await fetchDataObj.fetchData(CommonUtilities.constants.sourceByLangUrl);
+            let data = await apiData.json();  /*ES 2016*/
+            this.newsData = data.sources;
+            data.sources.map((item) => { //Used map on arrays
+                let option = CommonUtilities.createNode(CommonUtilities.constants.option);
+                option.text = item.name;
+                option.id = option.value = item.id;
+                channelsDropdown.add(option);
+            });
+            this.sourcesOnChange();
+        } catch (exception) {
+            console.log(exception);
+        }
     }
 
     sourcesOnChange() {
-        const channelsDropdown = document.getElementById("ddlchannelslist");
-        const selectedIndex = document.getElementById("ddlchannelslist").selectedIndex;
-        console.log(selectedIndex);
-        if (selectedIndex >= 0) {
-            const selectedItemId = channelsDropdown.options[selectedIndex].value;
+        try {
+            const channelsDropdown = document.getElementById(CommonUtilities.constants.ddlchannelslist);
+            const selectedIndex = document.getElementById(CommonUtilities.constants.ddlchannelslist).selectedIndex;
+            if (selectedIndex >= 0) {
+                const selectedItemId = channelsDropdown.options[selectedIndex].value;
 
-            const selectedSourceName = document.getElementById("selectedSourceName");
-            const selectedSourceCountry = document.getElementById("selectedSourceCountry");
-            const selectedSourcedescription = document.getElementById("selectedSourcedescription");
-            const selectedSourceLanguage = document.getElementById("selectedSourceLanguage");
-            const selectedSourceUrl = document.getElementById("selectedSourceUrl");
-            const filteredItem = this.newsData.filter(item => selectedItemId == item.id)[0];
+                const selectedSourceName = document.getElementById(CommonUtilities.constants.selectedSourceName);
+                const selectedSourceCountry = document.getElementById(CommonUtilities.constants.selectedSourceCountry);
+                const selectedSourcedescription = document.getElementById(CommonUtilities.constants.selectedSourcedescription);
+                const selectedSourceLanguage = document.getElementById(CommonUtilities.constants.selectedSourceLanguage);
+                const selectedSourceUrl = document.getElementById(CommonUtilities.constants.selectedSourceUrl);
+                const filteredItem = this.newsData.filter(item => selectedItemId == item.id)[0];
 
-            const { name, country, description, language, url } = filteredItem; //Used ES6 object destructuring
+                const { name, country, description, language, url } = filteredItem; //Used ES6 object destructuring
 
-            selectedSourceName.innerText = name;
-            selectedSourceCountry.innerText = country;
-            selectedSourcedescription.innerText = description;
-            selectedSourceLanguage.innerText = language;
-            selectedSourceUrl.innerText = selectedSourceUrl.href = url;
+                selectedSourceName.innerText = name;
+                selectedSourceCountry.innerText = country;
+                selectedSourcedescription.innerText = description;
+                selectedSourceLanguage.innerText = language;
+                selectedSourceUrl.innerText = selectedSourceUrl.href = url;
 
-            document.getElementById("topHeadlines").innerHTML = "";
+                const topHeadlinesEl = document.getElementById(CommonUtilities.constants.topHeadlines);
+                CommonUtilities.setInnerHTML(topHeadlinesEl, "");
+
+            }
+        } catch (exception) {
+            console.log(exception);
         }
-    }
-
-    async getTopHeadLines(apiKey) {
-        const channelsDropdown = document.getElementById("ddlchannelslist");
-        const selectedIndex = document.getElementById("ddlchannelslist").selectedIndex;
-        console.log(selectedIndex);
-        if (selectedIndex >= 0) {
-            const selectedItemId = channelsDropdown.options[selectedIndex].value;
-            const fetchDataObj = new FetchNewsData(apiKey);
-            let data = await (await fetchDataObj.fetchData(`top-headlines?sources=${selectedItemId}`)).json();   /*ES 2016*/
-            data.articles.map((item, index) => {
-                this.appendTopHeadlineNodes(`${selectedItemId}-${index}`, item);
-            });
-        }
-    }
-
-    appendTopHeadlineNodes(sourceID, item) {
-        const topHeadlines = document.getElementById("topHeadlines");
-        const headlineItem = this.createNode("div")
-        headlineItem.setAttribute("Id", sourceID);
-        const ItemDetails = `
-        <div><strong>Author :</strong> <label id="author-${sourceID}">${item.author}</label></div>
-        <div><strong>Title :</strong> <label id="title-${sourceID}">${item.title}</label></div>
-        <div><strong>Description :</strong> <label id="description-${sourceID}">${item.description}</label></div>
-        <div><strong>Url :</strong> <a id="url-${sourceID}" href="${item.url}">${item.url}</a></div>
-        <div><strong>UrlToImage :</strong> <a id="urlToImage-${sourceID}" href="${item.urlToImage}">${item.urlToImage}</a></div>
-        <div><strong>Content :</strong> <label id="content-${sourceID}">${item.content}</label></div>
-        <hr />
-        `;
-        headlineItem.innerHTML = ItemDetails;
-        topHeadlines.appendChild(headlineItem);
     }
 }
 
 
 /*Initiate the app */
-const apiKey = "c132a5c4ae714d27bdcc6b99f32c3c47";
-const newsFeed = document.getElementById('newsFeedData');
-const getTopHeadLines = document.getElementById("getTopHeadLines");
-const ddlchannelslist = document.getElementById("ddlchannelslist");
+const newsFeed = document.getElementById(CommonUtilities.constants.newsFeedData);
+const getTopHeadLines = document.getElementById(CommonUtilities.constants.getTopHeadLines);
+const ddlchannelslist = document.getElementById(CommonUtilities.constants.ddlchannelslist);
 
 let obj = new DisplayNews();
-obj.displaySources(apiKey);
+obj.displaySources(CommonUtilities.constants.apiKey);
 let channelsOnchange = () => obj.sourcesOnChange();
-let getTopHeadLinesMethod = () => obj.getTopHeadLines(apiKey);
-getTopHeadLines.addEventListener("click", getTopHeadLinesMethod);
-ddlchannelslist.addEventListener("change", channelsOnchange);
+let getTopHeadLinesMethod = () => {
+    import('./topHeadLines').then(app => { app.getTopHeadLines(CommonUtilities.constants.apiKey); })
+};
+
+
+() => TOPHeadLines.getTopHeadLines(CommonUtilities.constants.apiKey);
+getTopHeadLines.addEventListener(CommonUtilities.constants.click, getTopHeadLinesMethod);
+ddlchannelslist.addEventListener(CommonUtilities.constants.change, channelsOnchange);
