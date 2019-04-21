@@ -1,6 +1,8 @@
 # Front Camp Design Patterns Homework.
 
 
+## Review Comments
+
 1. The entire application logic is in a single file. He should make it modular and use the lazy loading (Make the app modular using import/exports)  --Done
 
 2. The application look and feel(UI) is still bad. Add some styling to make it better. -- TO BE Done
@@ -17,6 +19,22 @@
 
 8. Add the error handling --Done
 
-Adding Design Patterns
+Updated app to add rating and rating is stored.
+
+## Design Patterns
+
+#### Implemented below Creational Design patterns
+-   Prototype / Class Design Pattern
+-   Constructor Design Pattern
+-   Singleton Design Pattern
+-   Factory Design Pattern
+
+#### Implemented below Structural Design patterns
+-   Module Patterns
+-   Mixins Patterns
+
+#### Implemented below Structural Design patterns
+-   Mediator Pattern
+-   Iterator Pattern
 
 

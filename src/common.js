@@ -20,8 +20,10 @@ export class constants {
     static selectedSourcedescription = "selectedSourcedescription";
     static selectedSourceLanguage = "selectedSourceLanguage";
     static selectedSourceUrl = "selectedSourceUrl";
+    static selectedSourceRating = "selectedSourceRating";
     static newsFeedData = "newsFeedData";
     static getTopHeadLines = "getTopHeadLines";
+    static updateSourceRating = "updateSourceRating";
     
 
     static topHeadlines = "topHeadlines";
