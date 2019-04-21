@@ -1,9 +1,9 @@
 # Front Camp Design Patterns Homework.
 
 
-## Updated app to add rating and rating is stored.
+### Updated app to add rating and rating is stored.
 
-# Implementation of  Design Patterns
+## Implementation of  Design Patterns
 
 #### Implemented below Creational Design patterns
 -   Prototype / Class Design Pattern
