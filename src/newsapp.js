@@ -36,7 +36,6 @@ class DisplayNews {
 
     sourcesOnChange() {
         try {
-            debugger;
             const channelsDropdown = document.getElementById(CommonUtilities.constants.ddlchannelslist);
             const selectedIndex = document.getElementById(CommonUtilities.constants.ddlchannelslist).selectedIndex;
             if (selectedIndex >= 0) {
