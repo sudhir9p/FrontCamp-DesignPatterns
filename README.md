@@ -17,4 +17,10 @@
 
 8. Add the error handling --Done
 
+## Commands
+
+1.npm run build
+
+2.npm start , will start the webpack dev server.
+
 
