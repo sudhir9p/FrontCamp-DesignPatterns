@@ -14,7 +14,7 @@ export function setInnerHTML(el, value) {
 }
 
 export class constants {
-    static ddlchannelslist = "ddlchannelslist";
+    static ddlChannelsList = "ddlchannelslist";
     static selectedSourceName = "selectedSourceName";
     static selectedSourceCountry = "selectedSourceCountry";
     static selectedSourcedescription = "selectedSourcedescription";

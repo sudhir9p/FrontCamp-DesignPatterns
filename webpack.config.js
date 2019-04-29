@@ -2,11 +2,14 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
-    entry: "./src/newsapp.js",
+    entry: ['es6-promise/auto','isomorphic-fetch','@babel/polyfill','webpack/hot/dev-server' , "./src/newsapp.js"],
     mode: "development",
     output: {
         filename: "main.js",
         path: path.resolve(__dirname, "dist")
+    },
+    devServer: {
+        publicPath: '/dist/',
     },
     plugins: [
         new HtmlWebpackPlugin({
@@ -20,7 +23,6 @@ module.exports = {
         rules: [
             {
                 test: /\.js$/,
-                exclude: /(node_modules)/,
                 use: {
                     loader: 'babel-loader',
                     options: {

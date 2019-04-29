@@ -1,12 +1,12 @@
 import * as CommonUtilities from './common.js';
 import { FetchNewsData } from './httpservice.js';
 
-export async function getTopHeadLines(apiKey) {
-    const channelsDropdown = document.getElementById(CommonUtilities.constants.ddlchannelslist);
-    const selectedIndex = document.getElementById(CommonUtilities.constants.ddlchannelslist).selectedIndex;
+export async function getTopHeadLines() {
+    const channelsDropdown = document.getElementById(CommonUtilities.constants.ddlChannelsList);
+    const selectedIndex = document.getElementById(CommonUtilities.constants.ddlChannelsList).selectedIndex;
     if (selectedIndex >= 0) {
         const selectedItemId = channelsDropdown.options[selectedIndex].value;
-        const fetchDataObj = new FetchNewsData(apiKey);
+        const fetchDataObj = new FetchNewsData();
         let data = await (await fetchDataObj.fetchData(`${CommonUtilities.constants.topHeadlinesUrl}${selectedItemId}`)).json();   /*ES 2016*/
         data.articles.map((item, index) => {
             appendTopHeadlineNodes(`${selectedItemId}-${index}`, item);
