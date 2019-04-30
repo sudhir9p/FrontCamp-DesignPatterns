@@ -98,6 +98,78 @@ Strongly saying apikey is not a thing to get remembered by class DisplayNews. Ap
 5.5 The factory pattern doesn't work with GET, POST, PUT as it required in the task. I'd also propose to move it away from entities.js file (NewsSourceFactory is not an entity), call that Repository and implement work with factory there.
 5.6 MV* pattern is not applied in the code base. It's not demonstrated that mentee understands the difference between data, business-logic and view; importance of controlling the data flow via controller or similar constructions from other software design patterns.
 
+
+# Review comments By Siva Ninala
+
+### 1. Add a proxy layer on top of the factory implementation.
+
+### 2. Create an error popup using the singleton design pattern.
+	Example:
+		In the NewsSourceData class, if the API response is empty, rather returning a null display an error popup.
+
+### 3. if (data != null && data != undefined) can be simplified as if(data)
+--Done
+
+### 4. See if you can use || operator to set the default values
+	const name = data.name ? data.name : "";
+	
+	--Done
+
+### 5. The early returns(multiple return statements) are always not good. The singleton implementation for NewsSourceData can be simplified as below
+
+	constructor(data) {
+
+		if(! NewsSourceData.instance){
+			this.newsData = data;
+			NewsSourceData.instance = this;
+		}
+		return NewsSourceData.instance;
+	}
+	
+	--Done
+
+
+### 6. 
+export class constants {
+	static ddlchannelslist = “ddlchannelslist”;
+   static selectedSourceName = “selectedSourceName”;
+   ...
+   }
+These are just static members.They are not constants. One way of defining constants in ES5 is
+var AppConstants = {
+	APP_NAME = 'News App'
+}
+Object.freeze(AppConstants)
+
+(or)
+const APP_NAME = 'News App',
+      URL = 'http://test.com';
+class Constants {
+  static get APP_NAME() {
+    return APP_NAME;
+  }
+  static get URL() {
+    return URL;
+  }
+}
+
+
+--Done , 1st way
+
+###  7.
+const selectedSourceCountry = document.getElementById(CommonUtilities.constants.selectedSourceCountry);
+const selectedSourcedescription = document.getElementById(CommonUtilities.constants.selectedSourcedescription);
+const selectedSourceLanguage = document.getElementById(CommonUtilities.constants.selectedSourceLanguage);
+const selectedSourceUrl = document.getElementById(CommonUtilities.constants.selectedSourceUrl);
+....
+
+The code looks duplicated and looks ugly. Try to make it better.
+
+--Done used Maps
+
+### 8. Add a web pack plugin remove the comments and also understand the optimization for production mode
+-->Done, Added UglifyJs Plugin for optimization and to remove comments
+
  
  
  
