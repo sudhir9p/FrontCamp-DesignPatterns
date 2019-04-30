@@ -13,27 +13,27 @@ export function setInnerHTML(el, value) {
         el.innerHTML = value;
 }
 
-export class constants {
-    static ddlChannelsList = "ddlchannelslist";
-    static selectedSourceName = "selectedSourceName";
-    static selectedSourceCountry = "selectedSourceCountry";
-    static selectedSourcedescription = "selectedSourcedescription";
-    static selectedSourceLanguage = "selectedSourceLanguage";
-    static selectedSourceUrl = "selectedSourceUrl";
-    static selectedSourceRating = "selectedSourceRating";
-    static newsFeedData = "newsFeedData";
-    static getTopHeadLines = "getTopHeadLines";
-    static updateSourceRating = "updateSourceRating";
-    
+export var constants = {
+    ddlChannelsList: "ddlchannelslist",
+    selectedSourceName: "selectedSourceName",
+    selectedSourceCountry: "selectedSourceCountry",
+    selectedSourcedescription: "selectedSourcedescription",
+    selectedSourceLanguage: "selectedSourceLanguage",
+    selectedSourceUrl: "selectedSourceUrl",
+    selectedSourceRating: "selectedSourceRating",
+    newsFeedData: "newsFeedData",
+    getTopHeadLines: "getTopHeadLines",
+    updateSourceRating: "updateSourceRating",
+    topHeadlines: "topHeadlines",
+    divElement: "div",
+    option: "option",
+    Id: "Id",
+    click: "click",
+    change: "change",
 
-    static topHeadlines = "topHeadlines";
-    static divElement = "div";
-    static option="option";
-    static Id = "Id";
-    static click = "click";
-    static change = "change";
-
-    static topHeadlinesUrl = "top-headlines?sources=";
-    static apiKey = "c132a5c4ae714d27bdcc6b99f32c3c47";
-    static sourceByLangUrl = "sources?language=en";
+    topHeadlinesUrl: "top-headlines?sources=",
+    apiKey: "c132a5c4ae714d27bdcc6b99f32c3c47",
+    sourceByLangUrl: "sources?language=en",
 }
+
+Object.freeze(constants);

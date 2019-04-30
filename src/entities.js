@@ -27,31 +27,28 @@ export class TopHeadlines extends NewsSource {
 }
 
 //CREATTIONAL: Singleton Design Pattern
-let newsSourceinstance = null;
 export class NewsSourceData {
     constructor(data) {
-        if (!newsSourceinstance) {
+        if (!NewsSourceData.instance) {
             this.newsData = data;
-            return this;
+            NewsSourceData.instance = this;
         }
-        else {
-            return newsSourceinstance;
-        }
+        return NewsSourceData.instance;
     }
 }
 
 //CREATTIONAL: Factory Design Pattern
 export class NewsSourceFactory {
     static createNewsSource(data) {
-        if (data != null && data != undefined) {
-            const name = data.name ? data.name : "";
-            const id = data.id ? data.id : "";
-            const category = data.category ? data.category : "";
-            const description = data.description ? data.description : "";
-            const country = data.country ? data.country : "";
-            const language = data.language ? data.language : "";
-            const url = data.url ? data.url : "";
-            const rating = data.rating ? data.rating : "None";
+        if (data) {
+            const name = data.name || "";
+            const id = data.id || "";
+            const category = data.category || "";
+            const description = data.description || "";
+            const country = data.country || "";
+            const language = data.language || "";
+            const url = data.url || "";
+            const rating = data.rating || "None";
 
             return new NewsSource(id, name, category, country, description, language, url, rating);
         }

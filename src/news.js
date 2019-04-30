@@ -36,29 +36,21 @@ export class NewsManager {
             if (selectedIndex >= 0) {
                 const selectedItemId = channelsDropdown.options[selectedIndex].value;
 
-                const selectedSourceName = document.getElementById(CommonUtilities.constants.selectedSourceName);
-                const selectedSourceCountry = document.getElementById(CommonUtilities.constants.selectedSourceCountry);
-                const selectedSourcedescription = document.getElementById(CommonUtilities.constants.selectedSourcedescription);
-                const selectedSourceLanguage = document.getElementById(CommonUtilities.constants.selectedSourceLanguage);
-                const selectedSourceUrl = document.getElementById(CommonUtilities.constants.selectedSourceUrl);
-                const selectedSourceRating = document.getElementById(CommonUtilities.constants.selectedSourceRating);
                 const filteredItem = this.newsSourceData.newsData.filter(item => selectedItemId == item.id)[0];
-
-                //const { name, country, description, language, url } = filteredItem; //Used ES6 object destructuring
-                // const newsSource = new NewsSource(filteredItem.name,
-                //     filteredItem.country,
-                //     filteredItem.description,
-                //     filteredItem.language,
-                //     filteredItem.url);
                 const newsSource = NewsSourceFactory.createNewsSource(filteredItem);
                 this.currentSource = newsSource;
-                selectedSourceName.innerText = newsSource.category;
-                selectedSourceCountry.innerText = newsSource.country;
-                selectedSourcedescription.innerText = newsSource.description;
-                selectedSourceLanguage.innerText = newsSource.language;
-                selectedSourceRating.value = newsSource.rating;
-                selectedSourceUrl.innerText = selectedSourceUrl.href = newsSource.url;
+                
+                const sourceSummaryValuesMap = new Map([
+                    [CommonUtilities.constants.selectedSourceName, newsSource.category],
+                    [CommonUtilities.constants.selectedSourceCountry, newsSource.country],
+                    [CommonUtilities.constants.selectedSourcedescription, newsSource.description],
+                    [CommonUtilities.constants.selectedSourceLanguage, newsSource.language],
+                    [CommonUtilities.constants.selectedSourceUrl, newsSource.url],
+                    [CommonUtilities.constants.selectedSourceRating, newsSource.rating]
 
+                ])
+                this.assignValuesToElements(sourceSummaryValuesMap);
+                
                 const topHeadlinesEl = document.getElementById(CommonUtilities.constants.topHeadlines);
                 CommonUtilities.setInnerHTML(topHeadlinesEl, "");
 
@@ -76,5 +68,14 @@ export class NewsManager {
             if (item.id == this.currentSource.id)
                 this.newsSourceData.newsData[index].rating = this.currentSource.rating;
         });
+    }
+
+    assignValuesToElements(elementsAndValuesMap) {
+        elementsAndValuesMap.forEach((value, key, currentMap) => {
+            if (key == CommonUtilities.constants.selectedSourceRating)
+                document.getElementById(key).value = value;
+            else
+                document.getElementById(key).innerText = value;
+        })
     }
 }

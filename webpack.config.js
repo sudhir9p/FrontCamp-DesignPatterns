@@ -1,5 +1,6 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
 module.exports = {
     entry: ['es6-promise/auto','isomorphic-fetch','@babel/polyfill','webpack/hot/dev-server' , "./src/newsapp.js"],
@@ -38,5 +39,10 @@ module.exports = {
                 ]
             }
         ]
-    }
+    },
+    optimization: {
+        minimizer: [
+          new UglifyJsPlugin()
+        ]
+      }
 }
