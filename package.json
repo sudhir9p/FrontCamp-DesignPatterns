@@ -2,8 +2,9 @@
   "name": "frontcamp-webpack",
   "version": "",
   "scripts": {
-    "build": "node_modules/.bin/webpack --mode production",
-    "start": "webpack-dev-server --mode development --open --watch --hot"
+    "build": "node_modules/.bin/webpack --mode development",
+    "start": "webpack-dev-server --mode development --open --watch --hot",
+    "prestart":"npm run build"
   },
   "main": "newsapp.js",
   "description": "Webpack Basic",
@@ -23,9 +24,7 @@
     "uglifyjs-webpack-plugin": "2.1.2",
     "webpack": "4.28.4",
     "webpack-cli": "3.2.1",
-    "webpack-dev-server": "3.3.1"
-  },
-  "dependencies": {
+    "webpack-dev-server": "3.3.1",
     "@babel/plugin-proposal-class-properties": "7.4.0",
     "@babel/polyfill": "7.4.3"
   }

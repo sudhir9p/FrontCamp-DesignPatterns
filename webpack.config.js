@@ -3,11 +3,12 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
 module.exports = {
-    entry: ['es6-promise/auto','isomorphic-fetch','@babel/polyfill','webpack/hot/dev-server' , "./src/newsapp.js"],
+    entry: ['es6-promise/auto', 'isomorphic-fetch',
+        '@babel/polyfill', 'webpack/hot/dev-server', "./src/core/index.js"],
     mode: "development",
     output: {
-        filename: "main.js",
-        path: path.resolve(__dirname, "dist")
+        path: path.resolve(__dirname, "dist"),
+        filename: "main.js"
     },
     devServer: {
         publicPath: '/dist/',
@@ -16,6 +17,7 @@ module.exports = {
         new HtmlWebpackPlugin({
             inject: true,
             hash: true,
+            stats: { children: false },
             template: './index.html',
             filename: 'index.html'
         })
@@ -42,7 +44,7 @@ module.exports = {
     },
     optimization: {
         minimizer: [
-          new UglifyJsPlugin()
+            new UglifyJsPlugin()
         ]
-      }
+    }
 }
