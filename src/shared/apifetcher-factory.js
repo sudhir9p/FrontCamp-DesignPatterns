@@ -12,14 +12,4 @@ export class ApiFetcherFactory {
                 return new ArticlesFetcher();
         }
     }
-
-    fetchData = async (type) => {
-        try {
-            const requestUrl = this.request(type).fetch();
-            const response = await fetch(requestUrl);
-            return await response.json();
-        } catch (ex) {
-            console.error('Error fetching data');
-        }
-    }
 }

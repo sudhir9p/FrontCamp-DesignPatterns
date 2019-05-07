@@ -10,7 +10,7 @@ export default class NewsSourcesController {
     }
 
     initialize = async () => {
-        const sources = await proxy.fetchData("Sources");
+        const sources = await proxy.request("Sources");
         this.model.setSources(sources);
     }
 

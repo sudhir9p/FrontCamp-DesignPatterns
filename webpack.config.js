@@ -3,15 +3,23 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
 module.exports = {
+
+    devServer: {
+        contentBase: './dist',
+        port: 3999,
+        open: true,
+        inline: true,
+        hot: true,
+        disableHostCheck: true
+    },
     entry: ['es6-promise/auto', 'isomorphic-fetch',
         '@babel/polyfill', 'webpack/hot/dev-server', "./src/core/index.js"],
     mode: "development",
     output: {
         path: path.resolve(__dirname, "dist"),
-        filename: "main.js"
-    },
-    devServer: {
-        publicPath: '/dist/',
+        filename: "[name].[hash].js",
+        chunkFilename: '[name].bundle.js',
+        publicPath: "/"
     },
     plugins: [
         new HtmlWebpackPlugin({

@@ -4,7 +4,7 @@
   "scripts": {
     "build": "node_modules/.bin/webpack --mode development",
     "start": "webpack-dev-server --mode development --open --watch --hot",
-    "prestart":"npm run build"
+    "prestart": "npm run build"
   },
   "main": "newsapp.js",
   "description": "Webpack Basic",
