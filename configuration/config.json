@@ -2,5 +2,6 @@
     "apiHost": "https://newsapi.org/v2",
     "sourcesUrl": "sources?language=en",
     "articlesUrl": "top-headlines?sources=",
-    "apiKey":"c132a5c4ae714d27bdcc6b99f32c3c47"
+    "apiKey":"c132a5c4ae714d27bdcc6b99f32c3c47",
+    "defaultSourceName":"BBC Sport"
 }

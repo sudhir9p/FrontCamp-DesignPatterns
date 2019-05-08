@@ -1,14 +1,16 @@
 export class NewsSourcesModel {
     constructor(view) {
         this.view = view;
+        this.sources = [];
     }
 
     setSources(sources) {
         this.sources = sources;
-        this.updateView(sources);
+        this.view.loadSourcesDropdown(this.sources);
     }
 
-    updateView(sources) {
-        this.view.render(sources.sources);
+
+    updateSourceView(source) {
+        this.view.onSourceChange(source);
     }
 }

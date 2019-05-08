@@ -1,13 +1,13 @@
-import { ApiFetcherFactory } from './apifetcher-factory';
+import { ApiFetcherFactory } from './api-fetcher-factory';
 
 const apiFactory = new ApiFetcherFactory();
 
 const handler = {
     get: (target, propKey) => {
+        debugger;
         return (arg) => {
             console.log('Inside proxy and intercepting actual method call ');
-            const apiFetcher = target[propKey](arg);
-            return apiFetcher.fetchData();
+            return  target[propKey](arg);
         }
 
     }

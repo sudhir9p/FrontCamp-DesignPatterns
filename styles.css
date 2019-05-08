@@ -25,7 +25,6 @@ div {
 
     display: flex;
     width: 100%;
-    text-align: center;
 }
 .sourceslabel {
     font-size: 25px;
@@ -40,7 +39,7 @@ div {
     background-color: aqua;
 }
 
-#newsFeedData{
+#newsSummary{
     padding-left: 5px;
     border-style: groove;
 }
@@ -73,3 +72,6 @@ font: 20px Roboto-Thin;
     margin-left:5px;
 }
 
+.sideHeadings {
+    width: 150px;
+}

@@ -1,9 +1,9 @@
 import { apiHost, articlesUrl, apiKey } from '../../configuration/config.json'
 
-export default class ArticlesFetcher {
-    fetchData = async () => {
+export class ArticlesFetcher {
+    fetchData = async (sourceId) => {
         try {
-            const url = `${apiHost}/${sourcesUrl}&apiKey=${apiKey}`;
+            const url = `${apiHost}/${articlesUrl}${sourceId}&apiKey=${apiKey}`;
             const response = await fetch(url);
             return await response.json();
         } catch (ex) {

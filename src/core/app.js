@@ -12,7 +12,7 @@ export default class App {
         this.newsSources.setDefaultSource();
     }
 
-    handleNewsSourceChange= ()=>{
-        this.articlesList.fetchArticles();
+    handleNewsSourceChange= async (sourceId)=>{
+        await this.articlesList.fetchArticles(sourceId);
     }
 }

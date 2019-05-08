@@ -1,10 +1,11 @@
-import { ArticlesFetcher } from './articlesfetcher.js';
-import { SourcesFetcher } from './sourcesfetcher.js';
+import { ArticlesFetcher } from './articles-fetcher.js';
+import { SourcesFetcher } from './sources-fetcher.js';
 
 export class ApiFetcherFactory {
     constructor() { }
 
     request = (type) => {
+        debugger;
         switch (type) {
             case "Sources":
                 return new SourcesFetcher();
