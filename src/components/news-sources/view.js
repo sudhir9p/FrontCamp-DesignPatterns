@@ -26,13 +26,6 @@ export class NewsSourcesView {
         this.setSourceSummary(source);
     }
 
-    // createSourcesDropdown(newsSourceContainer) {
-    //     const sourcesDropdown = document.createElement('select');
-    //     sourcesDropdown.setAttribute("id", "soucres-dropdown");
-    //     this.updateSourcesDropdownList([{ name: "None", id: "0" }], sourcesDropdown);
-    //     newsSourceContainer.appendChild(sourcesDropdown);
-    // }
-
     updateSourcesDropdownList(data, sourcesDropdown) {
         if (data && data.length > 0) {
             data.forEach((item, index) => {

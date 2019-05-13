@@ -4,7 +4,6 @@ const apiFactory = new ApiFetcherFactory();
 
 const handler = {
     get: (target, propKey) => {
-        debugger;
         return (arg) => {
             console.log('Inside proxy and intercepting actual method call ');
             return  target[propKey](arg);

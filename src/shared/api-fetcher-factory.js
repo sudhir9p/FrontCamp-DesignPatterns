@@ -5,7 +5,6 @@ export class ApiFetcherFactory {
     constructor() { }
 
     request = (type) => {
-        debugger;
         switch (type) {
             case "Sources":
                 return new SourcesFetcher();

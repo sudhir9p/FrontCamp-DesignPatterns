@@ -11,7 +11,6 @@ export default class ArticlesListController {
     }
 
     fetchArticles = async (sourceId) => {
-        debugger;
         const articles = await proxy.request("Articles").fetchData(sourceId);
         this.model.setArticles(articles.articles);
     }
