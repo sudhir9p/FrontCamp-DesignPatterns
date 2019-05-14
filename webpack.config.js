@@ -1,17 +1,31 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
 module.exports = {
-    entry: "./newsapp.js",
+
+    devServer: {
+        contentBase: './dist',
+        port: 2016,
+        open: true,
+        inline: true,
+        hot: true,
+        disableHostCheck: true
+    },
+    entry: ['es6-promise/auto', 'isomorphic-fetch',
+        '@babel/polyfill', 'webpack/hot/dev-server', "./src/core/index.js"],
     mode: "development",
     output: {
-        filename: "main.js",
-        path: path.resolve(__dirname, "dist")
+        path: path.resolve(__dirname, "dist"),
+        filename: "[name].[hash].js",
+        chunkFilename: '[name].bundle.js',
+        publicPath: "/"
     },
     plugins: [
         new HtmlWebpackPlugin({
             inject: true,
             hash: true,
+            stats: { children: false },
             template: './index.html',
             filename: 'index.html'
         })
@@ -20,7 +34,6 @@ module.exports = {
         rules: [
             {
                 test: /\.js$/,
-                exclude: /(node_modules)/,
                 use: {
                     loader: 'babel-loader',
                     options: {
@@ -35,6 +48,11 @@ module.exports = {
                     { loader: 'css-loader' }
                 ]
             }
+        ]
+    },
+    optimization: {
+        minimizer: [
+            new UglifyJsPlugin()
         ]
     }
 }
