@@ -1,13 +1,12 @@
 export class ExceptionComponent {
-    
-    static instance = null;
-    static getInstance = async () => {
-        if (this.instance) {
-            return this.instance;
+
+    instance = null;
+    getInstance = async () => {
+        if (!this.instance) {
+            const errorModule = await import('./exception-view');
+            this.instance = new errorModule();
         }
 
-        const errorModule = await import('./exception-view');
-        this.instance = new module();
         return this.instance;
     }
 }
