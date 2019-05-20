@@ -32,8 +32,10 @@ export default class NewsSourcesController {
     setDefaultSource = () => {
         const source = this.model.sources.filter((item) => item.name === defaultSourceName);
         const currentSource = source && source.length > 0 ? source[0] : this.model.sources[0];
-        this.model.updateSourceView(currentSource);
-        this.onSourceChangeCallback(currentSource.id);
+        if (currentSource) {
+            this.model.updateSourceView(currentSource);
+            this.onSourceChangeCallback(currentSource.id);
+        }
     }
 
     setSource(sourceId) {

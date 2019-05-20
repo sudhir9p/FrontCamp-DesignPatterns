@@ -1,13 +1,19 @@
 export class ExceptionView {
-    getErrorPopup = () => document.getElementById("error-popup");
+
+    constructor() { }
+
+    getErrorPopup = () => document.getElementById("error-modal");
+    getErrorModalContent = () => document.getElementById("error-content-popup");
 
     displayError(exception) {
-        // alert(exception);
+        const errorModalContent = this.getErrorModalContent();
+        errorModalContent.innerHTML = exception.message;
+
         const errorPopup = this.getErrorPopup();
-        errorPopup.innerHTML = exception.Message;
-        errorPopup.className = "show";
+        errorPopup.style.display = "block";
+        
         setTimeout(() => {
-            errorPopup.className = "hide";
+            errorPopup.style.display = "none";
         }, 2000);
     }
 

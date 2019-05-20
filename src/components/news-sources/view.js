@@ -22,8 +22,10 @@ export class NewsSourcesView {
 
     onSourceChange(source) {
         const sourceDropdown = this.getSourcesDropdown();
-        sourceDropdown.value = source.id;
-        this.setSourceSummary(source);
+        if (source) {
+            sourceDropdown.value = source.id;
+            this.setSourceSummary(source);
+        }
     }
 
     updateSourcesDropdownList(data, sourcesDropdown) {
