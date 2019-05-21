@@ -17,9 +17,8 @@ export default class NewsSourcesController {
             this.model.setSources(sources.sources);
         }
         catch (exception) {
-            const excetionComp = new ExceptionComponent();
-            const exceptionHandler = await excetionComp.getInstance();
-            exceptionHandler.displayError(exception);
+            const exceptionHandler = await ExceptionComponent.getInstance();
+            exceptionHandler.exceptionView.displayError(exception);
         }
     }
 
