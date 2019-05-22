@@ -18,7 +18,7 @@ export default class NewsSourcesController {
         }
         catch (exception) {
             const exceptionHandler = await ExceptionComponent.getInstance();
-            exceptionHandler.exceptionView.displayError(exception);
+            exceptionHandler.displayError(exception);
         }
     }
 

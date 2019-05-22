@@ -5,9 +5,7 @@ export class SourcesFetcher {
     fetchData = async () => {
 
         const url = `${apiHost}/${sourcesUrl}&apiKey=${apiKey}`;
-        const response = await fetch(url).catch((ex) => {
-            throw ex;
-        });
+        const response = await fetch(url);
         return await response.json();
 
     }

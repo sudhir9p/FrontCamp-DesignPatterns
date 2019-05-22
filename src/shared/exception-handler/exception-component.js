@@ -5,8 +5,7 @@ export class ExceptionComponent {
     static getInstance = async () => {
         if (!ExceptionComponent.instance) {
             const errorModule = await import('./exception-view');
-            this.exceptionView = new errorModule.ExceptionView();
-            ExceptionComponent.instance = this;
+            ExceptionComponent.instance = new errorModule.ExceptionView();
         }
 
         return ExceptionComponent.instance;
